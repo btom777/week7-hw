@@ -21,8 +21,6 @@ var dataRef = firebase.database();
 
 $('#submit').on('click', function() {
 
-	alert("here");
-
 	var nametrain = $('#train').val().trim();
 	var place = $('#destination').val().trim();
 	var start = $('#firsttime').val().trim();
@@ -33,16 +31,12 @@ $('#submit').on('click', function() {
 	console.log(start);
 	console.log(trate);
 
-	alert("here3");
-
 	dataRef.ref().push( {
 		nametrain: nametrain,
 		place: place,
 		start: start,
 		trate: trate,
 	});
-
-	alert("here2");
 
 	return false;
 
@@ -52,8 +46,6 @@ $('#submit').on('click', function() {
 dataRef.ref().on("child_added", function(snapshot) {
 
     // Log everything that's coming out of snapshot
-	alert("here7");
-	console.log("7");
     console.log(snapshot.val().nametrain);
     console.log(snapshot.val().place);
     console.log(snapshot.val().start);
@@ -76,8 +68,6 @@ dataRef.ref().on("child_added", function(snapshot) {
 
 	var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 	console.log("Arrival Time: " + moment(nextTrain).format("hh:mm"));
-
-	alert("here5");
 
    // Change the HTML to reflect
        var $div = $("<div>");
@@ -118,8 +108,6 @@ dataRef.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", functio
 
 	var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 	console.log("Arrival Time: " + moment(nextTrain).format("hh:mm"));
-
-	alert("here6");
 
 	// Change the HTML to reflect
 	$("#newEntry").append("<tr>" + "<br>" + "<td>" + snapshot.val().nametrain + "</td>" + "<br>" + "<td>" + snapshot.val().place + "</td>" + "<br>" + "<td>" + snapshot.val().trate + "</td>" + "<br>" + "<td>" + moment(nextTrain).format("hh:mm") + "</td>" + "<br>" + "<td>" + tMinutesTillTrain + "</td>");
